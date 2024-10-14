@@ -1,0 +1,8 @@
+langchain
+faiss-cpu
+langchain-community
+pydantic
+google.generativeai
+langchain-google-genai
+beautifulsoup4
+pypdf

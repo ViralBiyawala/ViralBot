@@ -1,0 +1,4 @@
+lang_env/
+.env
+app.py
+templates/
