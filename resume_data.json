@@ -1,0 +1,247 @@
+{
+    "personal_info": {
+        "name": "Viral Biyawala",
+        "email": "viralbiyawala@gmail.com",
+        "phone": "+(91) 8238178802",
+        "location": "Surat, Gujarat, India",
+        "linkedin": "linkedin.com/in/viralbiyawala",
+        "github": "github.com/viralbiyawala",
+        "portfolio": "https://viralbiyawala.pythonanywhere.com/"
+    },
+    "about_me": "I am a passionate and dedicated Computer Science student with a keen interest in Artificial Intelligence, Machine Learning, and Data Science. I have a strong foundation in programming, data analysis, and software development, with hands-on experience in building AI solutions, predictive models, and web applications. I am committed to continuous learning and professional growth, seeking opportunities to apply my skills and knowledge to real-world challenges and make a positive impact in the tech industry.",
+    "education": [
+        {
+            "degree": "Bachelor of Technology",
+            "field":"Computer Science and Engineering",
+            "institution": "Indian Institute of Information Technology Surat",
+            "duration": "Dec 2021 - May 2025",
+            "cgpa": "9.33/10.0"
+        },
+        {
+            "degree": "Higher Secondary Certificate (HSC)",
+            "field":"Science PCM",
+            "institution": "Gujarat Secondary and Higher Secondary Education Board",
+            "duration": "Mar 2020 - Mar 2021",
+            "percentage": "88.46%"
+        },
+        {
+            "degree": "Secondary School Certificate (SSC)",
+            "field":"Science",
+            "institution": "Gujarat Secondary and Higher Secondary Education Board",
+            "duration": "Mar 2018 - Mar 2019",
+            "percentage": "89.00%"
+        }
+    ],
+    "experience": [
+        {
+            "title": "AI/ML Intern",
+            "company": "Build Macro",
+            "duration": "Jul 2024 - Sep 2024",
+            "description": [
+                {
+                    "list": "Engineered an AI solution utilizing Tesseract-OCR and YOLOv9 to automate the detection of architectural objects"
+                },
+                {
+                    "list": "Reduced the processing time up to 91% by automating object detection and area calculations for clients"
+                },
+                {
+                    "list": "Deployed the system on Google Cloud Platform, achieving 85% accuracy in detecting architectural elements"
+                },
+                {
+                    "list": "Technology used: Python, Google Cloud Platform, RESTful API, Git, Roboflow, OpenCV"
+                }
+            ]
+        }
+    ],
+    "projects": [
+        {
+            "title": "Stanford LLM Tutor",
+            "description": "Stanford LLM Tutor is an AI chat assistant designed for understanding Stanford University's Large Language Models lecture notes. It uses structured JSON data, FAISS vector databases for quick indexing, and advanced algorithms to provide accurate explanations based on Stanford's LLM content. Integrated with Hugging Face's pipeline, it delivers tailored responses to user queries.",
+            "live_link": "https://www.kaggle.com/code/viralbiyawala/llm-bot-use",
+            "github_link": "https://github.com/ViralBiyawala/Stanford_LLM_Tutor",
+            "stars": 5,
+            "language": "Jupyter Notebook",
+            "readme": "# Stanford LLM Tutor | AI Bot\n\n## Project Overview\n\nThis repository contains the implementation of an AI bot built using a transformer model (`gpt2`) from Hugging Face. The chatbot leverages FAISS for vector database storage to efficiently match user queries with relevant data. The data used for training and response generation was scraped from the official Stanford LLM course.\n\n## Features\n\n- **Language Model**: Utilizes the `gpt2` model from Hugging Face.\n- **Vector Database**: Implements FAISS to store and retrieve keys efficiently.\n- **Data Sources**: Scraped from various lectures of the Stanford LLM course.\n- **Content Types**: Handles various content types including paragraphs, tables, equations, links, ordered lists, and unordered lists.\n- **Query Matching**: Matches user queries to the top 2 closest keys using FAISS and constructs a prompt with the retrieved data.\n\n## How It Works\n\n1. **Data Scraping**: The data is scraped from various lectures of the Stanford LLM course. The `h2`, `h3`, and `<strong>` tags serve as keys, and the corresponding content is categorized into paragraphs, tables, links, equations, ordered lists, and unordered lists.\n\n2. **Vector Database (FAISS)**: The keys are stored in a FAISS vector database using L2 distance for efficient retrieval. When a user query is received, FAISS finds the top 2 closest matching keys based on vector similarity.\n\n3. **Prompt Generation**: The chatbot constructs a structured prompt using the data retrieved from FAISS. This prompt includes paragraphs, tables, equations, links, ordered lists, and unordered lists as relevant to the matched keys.\n\n4. **Response Generation**: The constructed prompt is fed into the GPT-2 model to generate a coherent and relevant response to the user query.\n\n## Data Schema\n\nThe data scraped from the Stanford LLM course lectures have the following schema:\n\n```\nkey1:{\n  {\n      'paragraphs': [],\n      'tables': [],\n      'links': [],\n      'equations': [],\n      'ordered_lists': [],\n      'unordered_lists': []\n  } }\nkey2:{\n  {\n      'paragraphs': [],\n      'tables': [],\n      'links': [],\n      'equations': [],\n      'ordered_lists': [],\n      'unordered_lists': []\n  } }\n```\n\nEach key corresponds to `h2`, `h3`, or `<strong>` tags from the lecture pages. The data associated with each key includes paragraphs, tables, links, equations, ordered lists, and unordered lists if they exist.\n\n## Example Usage\n\n1. **User Query**: \"What are Benefits and Harms?\"\n\n2. **FAISS Retrieval**: The query is matched to the top 2 closest keys in the vector database using L2 distance.\n\n3. **Prompt Construction**:\n    ```\n    # Create a structured prompt\n    prompt = f\"**Question:** {query}\\n\\n\"\n    \n    # Add top 2 matched sections\n    prompt += f\"**Sections:**\\n- {result_key1}\\n- {result_key2}\\n\\n\"\n    \n    # Add content to the prompt\n    for result_key, result_content in [(result_key1, result_content1), (result_key2, result_content2)]:\n        if result_content.get('paragraphs'):\n            prompt += \"**Paragraphs:**\\n\" + \"\\n\".join(result_content['paragraphs']) + \"\\n\\n\"\n        if result_content.get('ordered_lists'):\n            prompt += \"**Ordered Lists:**\\n\" + \"\\n\".join([\"\\n\".join(ol) for ol in result_content['ordered_lists']]) + \"\\n\\n\"\n        if result_content.get('unordered_lists'):\n            prompt += \"**Unordered Lists:**\\n\" + \"\\n\".join([\"\\n\".join(ul) for ul in result_content['unordered_lists']]) + \"\\n\\n\"\n        if result_content.get('tables'):\n            prompt += \"**Tables:**\\n\" + \"\\n\".join([\"\\n\".join(table) for table in result_content['tables']]) + \"\\n\\n\"\n        if result_content.get('links'):\n            prompt += \"**Links:**\\n\" + \"\\n\".join(result_content['links']) + \"\\n\\n\"\n        if result_content.get('equations'):\n            prompt += \"**Equations:**\\n\" + \"\\n\".join(result_content['equations']) + \"\\n\\n\"\n    \n    # Add a closing statement\n    prompt += \"Answer is :\"\n    \n    # Define max_length\n    max_length = min(len(prompt) + 100, 750)\n    \n    # Generate response\n    response = generator(prompt[:750], max_length=max_length, num_return_sequences=1, truncation=True, pad_token_id=50256)\n    ```\n\n4. **Generated Response**: The GPT-2 model uses the prompt to generate a detailed response.\n\n## Example Screenshot\n\n![Example Screenshot](example_screenshotv2.png)\n\nThis screenshot shows an example interaction where the chatbot responds to a user query about the basics of LLMs.\n\n## Training Details\n\n- **Platform**: Kaggle\n- **Hardware**: CPU\n\nThe model was trained on Kaggle using CPU resources.\n\n## Contributing\n\nContributions are welcome! Please open an issue or submit a pull request for any improvements or new features.\n\n## License\n\nThis project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.\n\n## Acknowledgements\n\n- [Hugging Face](https://huggingface.co/)\n- [FAISS](https://github.com/facebookresearch/faiss)\n- [Stanford LLM Course](https://stanford-cs324.github.io/winter2022/)\n"
+        },
+        {
+            "title": "Recipe Site Traffic Prediction",
+            "description": "By meticulously scrutinizing data patterns, I achieved an outstanding 83% accuracy rate. Employing a blend of intricate feature selection, precise hyperparameter adjustments, and advanced ensemble voting strategies, I significantly amplified model efficacy. The result? A striking 40% average surge in website traffic, fueled by our ability to deliver spot-on daily recipe forecasts.",
+            "live_link": "https://app.datacamp.com/workspace/w/058082b0-6db9-4b7e-a510-faa8de89f91d",
+            "github_link": ""
+        },
+        {
+            "title": "MindCare - Mental Health Awareness",
+            "description": "I led the backend development and seamlessly integrated Machine Learning, merging React (Vite framework), Django, and MongoDB into a cohesive system for MindCare. This innovative amalgamation forms the backbone for swiftly identifying concerning posts, utilizing email mechanisms to notify users, and introducing a novel quiz-based yoga recommender for enhancing holistic well-being, all augmented by REST API architecture for seamless data transfer.",
+            "live_link": "https://mindcare-sable.vercel.app/",
+            "github_link": "https://github.com/ViralBiyawala/MindCare",
+            "stars": 0,
+            "language": null,
+            "readme": "# MindCare\n\nMindCare is a project dedicated to raising awareness about mental health issues and providing support through personalized recommendations and an interactive platform.\n\n## Table of Contents\n- [Description](#description)\n- [About](#about)\n- [Team Members](#team-members)\n- [Features](#features)\n- [Glimpse of Website](#glimpse-of-website)\n- [Usage](#usage)\n\n## Description\nMindCare is designed to educate users about mental health conditions such as stress, depression, and anxiety. It offers personalized recommendations based on quizzes and provides a platform for users to interact and seek support. The project utilizes React with the Vite framework for the frontend, Django for the backend, and MongoDB as the database. Additionally, it integrates machine learning algorithms to analyze user content, identify potentially concerning posts, and intervene when necessary. This approach ensures that users receive timely support and resources tailored to their specific needs.\n\n## About\nMindCare is a web application developed to promote mental well-being and provide resources for individuals facing mental health challenges. It offers educational content, personalized recommendations, and a supportive community forum to facilitate discussion and support. The platform aims to create a safe space where users can openly share their experiences, access valuable information, and receive encouragement from peers and professionals. By leveraging technology, MindCare strives to bridge the gap between those seeking help and the resources available to them, fostering a more inclusive and supportive environment for mental health care.\n\n## Team Members\n- [Shivam Sikotra (UI21CS55)](https://github.com/ShivamSikotra11/)\n- [Shyam Patel (UI21CS57)](https://github.com/shyam2024)\n- [Viral Biyawala (UI21CS66)](https://github.com/ViralBiyawala)\n\n## Features\n- **Quizzes**: Assess mental health status through interactive quizzes designed by mental health professionals. These quizzes help identify symptoms of stress, depression, and anxiety, and provide a baseline for personalized recommendations.\n- **Personalized Recommendations**: Based on quiz results, users receive tailored suggestions such as yoga practices, meditation techniques, and lifestyle changes that can help improve their mental health. These recommendations are designed to be practical and easy to implement in daily life.\n- **Educational Content**: Access a wealth of information on various mental health topics, including the symptoms, causes, and treatments of stress, depression, and anxiety. The educational content is curated to be engaging and informative, helping users gain a better understanding of their mental health.\n- **Interactive Platform**: Engage with a community of users who are also focused on improving their mental health. The platform supports real-time interactions, allowing users to share experiences, offer support, and build connections with others who understand their struggles.\n- **Forum**: A dedicated space for users to discuss their mental health journeys, ask questions, and seek advice from peers and mental health professionals. The forum is moderated to ensure a safe and respectful environment for all participants.\n- **Machine Learning**: Utilizes advanced machine learning algorithms to monitor user posts and detect signs of distress or harmful behavior. When such content is identified, the system can alert moderators or provide users with resources and support options to address their needs.\n- **Accessibility**: Designed with inclusivity in mind, MindCare includes features that ensure accessibility for users with disabilities.\n- **Responsive Design**: Optimized for seamless viewing and interaction across all devices, including desktops, tablets, and smartphones. This ensures that users can access MindCare's resources and community support wherever they are.\n\n## Glimpse of Website\n\n### Blogs\n![Blogs](images/blog.jpg)\n\n### Quiz\n![Quiz](images/quiz.jpg)\n\n### Interaction Page\n![Interaction Page](images/interact.jpg)\n\n### Graphs on Profile Page\n![Graphs on Profile Page](images/profile.jpg)\n\n## Usage\n### Live Link : https://mindcare-sable.vercel.app/\n\n### Steps :\n1. **Registration and Login**: Create a new account or log in to access your existing account.\n2. **Home Page Tour**: Follow the guided tour to familiarize yourself with the website's features.\n3. **Taking the Quiz**: Complete the mental health quiz to receive personalized recommendations.\n4. **Viewing Suggestions**: Explore general insights and solutions for stress, depression, and anxiety.\n5. **Interacting with the Community**: Post, read, like, and comment on user posts to engage with the community.\n6. **Receiving Alerts**: The system monitors posts for concerning content and alerts appropriate parties.\n7. **Profile Management**: View and update your profile information and track your quiz history.\n8. **Logging Out**: Securely log out of your account when finished using the website.\n\n## Installation\nClone the repository using `git clone https://github.com/ShivamSikotra11/MHA.git`.\n\n### Backend\n1. Navigate to the `backend` directory.\n2. Install dependencies using `pip install -r requirements.txt`.\n3. Start the Django server using `python manage.py runserver`.\n\n### Frontend  \n1. Navigate to the `frontend` directory.\n2. Install dependencies using `npm install`.\n3. Start the Vite development server using `npm run dev`.\n"
+        },
+        {
+            "title": "LearnAI Studio",
+            "description": "LearnAI Studio is a versatile platform designed to provide users with structured, modular courses by leveraging LLMs and generative AI. We integrated advanced technologies, including the Gemini API and Pinecone, to enhance vector and semantic search capabilities, achieving a 40% improvement in accuracy. Redis caching was also employed to optimize data retrieval, resulting in a 35% performance boost and reducing response times from 2095.72ms to 1362.22ms. LearnAI Studio supports a diverse range of courses, including technical, non-technical, and interdisciplinary subjects, ensuring a comprehensive and adaptive learning experience for all users.",
+            "live_link": "https://learn-ai-studio.vercel.app/",
+            "github_link": "https://github.com/jitanshuraut/Learn-AI-Studio",
+            "stars": 1,
+            "language": "TypeScript",
+            "readme": "# Version 2 in Development\n## Features will added:\n- Personalized Structure: Upload images of course outlines, like college course syllabus, for a customized experience.\n- RouteLLM: Uses a multimodal approach, applying different models for specific tasks\u2014for example, OpenAI for math topic .\n- Advancements will be made to improve the database. \n#  **Learn AI Studio** \n![image (1)](https://github.com/user-attachments/assets/29779487-ebfc-4c41-87f7-3e7a96d8a1a6)\n\nWelcome to **Learn AI Studio** \u2013 an innovative platform designed to revolutionize personalized learning experiences using the power of generative AI.\n\n## \ud83c\udf1f [Try the Demo](https://learn-ai-studio.vercel.app/)\n\n## \ud83d\udd0d How It Works\n\n1. **Create Account** \ud83d\udcdd\n   - Sign up and receive 5 free credits\n\n2. **Input a Prompt** \ud83d\udca1\n   - Enter a topic or subject you want to explore\n\n3. **AI Course Generation** \ud83e\udd16\n   - Our AI processes your prompt\n   - Generates a structured course outline\n   - Creates content modules and interactive elements\n\n## \ud83d\udee0\ufe0f Tech Stack\n\n| Category | Technologies |\n|----------|--------------|\n| Frontend & Full Stack | Next.js |\n| Backend | Prisma ORM, Redis |\n| Authentication | Nuth Auth |\n| Storage | Pinecone (vector storage), PostgreSQL |\n| Course Generation | Gemini API (LLM) |\n\n\n## \ud83d\ude80 Getting Started\n\n1. Clone the repository:\n    ```bash\n    git clone https://github.com/jitanshuraut/Learn-AI-Studio.git\n    cd your-repo/\n    ```\n\n2. Install dependencies:\n    ```bash\n    bun install\n    ```\n\n3. Set up the environment variables by creating a `.env` file and configuring the required variables.\n\n4. Run the application:\n    ```bash\n    bun dev\n    ```\n\n5. Open your browser and navigate to:\n    ```url\n    http://localhost:3000\n    ```\n\nFollow the instructions on the page to complete the setup.\n\n## How to contribute\nTo contribute via pull request, follow these steps:\n\n1. Create an issue describing the feature you want to work on (Bugs, themes,  plugins, new features or webhooks).\n2. Write your code, tests and documentation, and format them with ``black``\n3. Create a pull request describing your changes\n\n## Have an idea? Notice a bug? Need help?\n\nI'd love to hear your feedback! Feel free to log an issue on our [GitHub issues page](https://github.com/jitanshuraut/Learn-AI-Studio.git). If your question is more personal, [Jitanshu Raut on LinkedIn](https://www.linkedin.com/in/jitanshu-raut-438b76246/) is always open as well.\n\n"
+        },
+        {
+            "title": "Attrition Analysis | Atlas-Labs",
+            "description": "This Power BI dashboard analyzes employee attrition, visualizing key metrics such as overall attrition rate, hiring trends, and active employees by department and job role. It includes demographic insights, performance tracking, and detailed attrition analysis by various factors, helping stakeholders manage and reduce employee turnover effectively.",
+            "live_link": "",
+            "github_link": "https://github.com/ViralBiyawala/ATLAS-PowerBI",
+            "stars": 1,
+            "language": null,
+            "readme": "# ATLAS Labs Employee Attrition Dashboard | Power BI\n\n## Overview\nThis Power BI dashboard analyzes employee attrition, visualizing key metrics such as overall attrition rate, hiring trends, and active employees by department and job role. It includes demographic insights, performance tracking, and detailed attrition analysis by various factors, helping stakeholders manage and reduce employee turnover effectively.\n\n## Features\n- **Attrition Rate Overview**: Displays the overall attrition rate and hiring trends.\n- **Employee Demographics**: Visualizes employee distribution by age, gender, marital status, and ethnicity.\n- **Performance Tracker**: Tracks individual employee performance metrics over the years.\n  - WorkLife Balance\n  - Job Satisfaction\n  - Enivornment Satisfaction\n  - Relationship Satisfaction\n- **Detailed Attrition Analysis**: Examines attrition rates by department, job role, hire date, travel frequency, overtime, and tenure.\n\n## Screenshots\nHere are some screenshots of the dashboard:\n\n### Overview Page\n![Overview](pictures/overview.png)\n\n### Demographics Page\n![Demographics](pictures/demographics.png)\n\n### Model and Relationship view\n![Model](pictures/model.jpg)\n\n## Full PDF Report\nFor a detailed view, you can download the full PDF report [ATLAS_ALBS.pdf](ATLAS_LABS.pdf).\n\n## How to Use\n1. **Open Power BI Report**: Download and open the .pbix file in Power BI Desktop.\n2. **Navigate the Pages**: The dashboard consists of four main pages: Overview, Demographics, Performance Tracker, and Attrition.\n3. **Interactive Filters**: Use the interactive filters to drill down into specific segments of data.\n4. **Sharing**: Publish the report to Power BI Service for real-time updates and collaborative access.\n\n## Data Sources\nThe raw data used for analsysis is [here](case-study-atlas-labs.zip).\n\n\nThe dashboard is powered by data from the following sources:\n- Employee records including hire dates, department, job roles, and performance ratings.\n- Demographic information such as age, gender, marital status, and ethnicity.\n- Performance evaluation data.\n\n## Installation\n1. Download the .pbix file [ATLAS_ALBS.pbix](ATLAS_LABS.pbix).\n2. Open Power BI Desktop.\n3. Load the .pbix file to view the dashboard.\n\n## Acknowledgments\n- [**ATLAS LABS**](https://www.atlaslab.in/) for providing the dataset.\n\n## Contribution\nFeel free to contribute by submitting issues or pull requests. For major changes, please open an issue first to discuss what you would like to change.\n"
+        },
+        {
+            "title": "Life Saver - Blood Bank Management System",
+            "description": "I developed a robust backend for the LifeSaver using Flask and SQLite. It included a multi-tiered login system, OTP verification, and efficient blood distribution across cities. It also incorporated visualization tools and an admin interface for seamless process management. The goal was to redefine blood donation processes, showcasing our full stack web development expertise.",
+            "live_link": "https://lifesaver.pythonanywhere.com/",
+            "github_link": "https://github.com/ViralBiyawala/BBMS",
+            "stars": 2,
+            "language": "HTML",
+            "readme": "# Blood Bank Management System\n\nThe Blood Bank Management System is a comprehensive web-based platform designed to revolutionize the management of blood donations, requests, and inventory. This project aims to address the challenges and inefficiencies of existing blood bank management systems, such as outdated interfaces, manual processes, and lack of real-time coordination. By leveraging modern web technologies, we've created a dynamic solution that ensures seamless interaction and collaboration among users, ultimately enhancing the availability and accessibility of life-saving blood products.\n\n## Features\n\n**Tailored Login System:** A sophisticated three-type of login system caters to donors, hospitals, and administrators, providing each user group with personalized functionalities and intuitive interfaces.\n\n**Enhanced Security Measures:** Robust registration and authentication mechanisms using OTP verification ensure secure access for all users, safeguarding sensitive information and maintaining data integrity.\n\n**Efficient Donor Management:** Donors can effortlessly schedule appointments, access their donation history, and update profile details, streamlining the blood donation process.\n\n**Streamlined Hospital Management:** Hospitals facilitate seamless blood request submissions, efficient recipient record management, and effortless blood group searches, enhancing patient care delivery.\n\n**Effective Blood Inventory Management:** The system efficiently tracks blood donations, manages inventory levels, and facilitates timely distribution to meet the demands of healthcare facilities.\n\n**Proactive Notification System:** Dynamic notification system delivers instant alerts to donors, hospitals, and administrators, keeping them informed about blood requests, donations, and inventory updates in real-time.\n\n**Administrative Oversight:** The admin panel grants administrators comprehensive control over user management, system monitoring, and report generation, empowering administrators with advanced analytics and reporting tools to monitor system performance, analyze trends, and derive actionable insights for informed decision-making.\n\n## User Actions\n\n### Donor\n\n**Register and Profile Creation:** Seamlessly register as a donor and craft a comprehensive profile, including personal details, blood type, and donation history.\n\n**Appointment Scheduling:** Effortlessly schedule blood donation appointments and receive timely reminders and notifications regarding your donation status.\n\n**Donation Tracking:** Easily monitor your donation history and access insightful statistics to track your impactful contributions.\n\n**Donation Certification:** Upon successful donation, receive a prestigious Donation Certificate as a token of appreciation\n\n### Hospital\n\n**Registration and Profile Establishment:** Swiftly register as a hospital entity and establish a robust profile, furnishing essential hospital and blood bank particulars.\n\n**Blood Donation Requests:** Efficiently solicit blood donations from donors and stay updated in real-time with dynamic updates on donation statuses and availability.\n\n**Patient Management:** Streamline patient management operations by seamlessly adding and tracking patient information within the dedicated hospital section.\n\n### Administrator\n\n**User Management:** Seamlessly manage the accounts of donors, hospitals, and fellow administrators, exercising granular control over permissions and access levels.\n\n**System Oversight and Analytics:** Diligently monitor system performance, leveraging advanced analytics to generate comprehensive reports on donation history, inventory levels, and user engagement metrics.\n\n**Customization and Configuration:** Tailor the system to organizational needs by configuring system settings and fine-tuning the user interface and functionalities to optimize user experience and operational efficiency.\n\n## Technologies\n\n**Backend Framework:** Flask powers the backend, offering a lightweight and flexible architecture for web development.\n\n**Database System:** SQLite ensures reliability and scalability for data storage and retrieval.\n\n**Frontend Technologies:** HTML, CSS, and JavaScript come together to create a rich and interactive user interface.\n\n**Frontend Framework:** Bootstrap enhances the frontend with a responsive and customizable design system.\n\n**Data Visualization:** Chart.js adds depth to the user experience with powerful and flexible charts and graphs.\n\n## Installation\n\n1. Clone the repository: `git clone https://github.com/username/blood-bank-management-system.git`\n2. Install the dependencies: `pip install -r requirements.txt`\n3. Run the application: `python app.py`\n\n## Usage\n\n1. Website Link: https://lifesaver-uxlr.onrender.com/\n2. Navigate to the registration page and create an account as a donor, hospital, or blood bank.\n3. Log in with your credentials.\n4. Explore the respective functionalities based on your user role.\n5. Schedule appointments, request blood, manage records, and more.\n\n## Screenshots\n\n### Login Page\n![Login Page](login.jpg)\n\n### OTP Verification Page\n![OTP Verification Page](otp.jpg)\n\n### Home Page\n![Home Page](home.jpg)\n\n### Appointment Page\n![Appointment Page](appointment.jpg)\n\n### Admin Dashboard\n![Admin Dashboard](admin_dashboard.jpg)\n\n## License\nThis project is licensed under the Creative Commons Attribution-Non Commercial-No Derivatives 4.0 International (CC BY-NC-ND 4.0) license. You can use this project for learning purposes, but you cannot modify or distribute it without permission. See the LICENSE.md file for details.\n\n## Acknowledgments\n\n- [Flask Documentation](https://flask.palletsprojects.com/en/2.1.x/)\n- [SQLite Documentation](https://www.sqlite.org/docs.html)\n- [HTML Tutorial](https://www.w3schools.com/html/)\n- [CSS Tutorial](https://www.w3schools.com/css/)\n- [JavaScript Tutorial](https://www.w3schools.com/js/)\n- [Bootstrap Documentation](https://getbootstrap.com/docs/5.1/getting-started/introduction/)\n- [Chart.js Documentation](https://www.chartjs.org/docs/latest/)\n"
+        },
+        {
+            "title": "ViralShare",
+            "description": "ViralShare is a peer-to-peer file sharing application designed to streamline the exchange of files among users on a network. It offers a lightweight, secure, and user-friendly platform for setting up servers, connecting to peers, and sharing files effortlessly. With built-in password protection and intuitive interface, ViralShare ensures seamless file sharing experiences while maintaining data security and user privacy.",
+            "live_link": "",
+            "github_link": "https://github.com/ViralBiyawala/ViralShare",
+            "stars": 1,
+            "language": "Python",
+            "readme": "# Welcome to ViralShare!\n\nViralShare is a lightweight peer-to-peer file sharing application designed to facilitate easy and secure sharing of files among users on a network. With ViralShare, you can quickly set up your own file sharing server, connect to other peers, share your files, and download files shared by others.\n\n## Getting Started\n\nTo start using ViralShare, follow these simple steps:\n\n### 1. Create the Executable\n\n- Make sure you have Python installed on your system. You can download it from the official Python website.\n\n- Open a terminal or command prompt.\n\n- Download the `ViralShare.py` and `build_executable.py` scripts to your local machine.\n\n- Run the following command to create the executable:\n   ```python build_executable.py```\n\n- This will install executable file `ViralShare.exe` in `dict` folder, and copy and paste it to your desired location.\n\n### 2. Installing and Running ViralShare\n\n- Once the download is complete, locate the downloaded ViralShare.exe file on your computer.\n- Double-click on the ViralShare.exe file to launch the application.\n- A terminal window will also open along with file sharing interface, displaying all information and error logging that happens live while running application.\n- Two logging files, `access.log` and `error.log`, will be created at the same level as the application file.\n\n### 3. Setting Up Your Server\n\n- Upon launching ViralShare, you will be prompted to set up your server. Enter a port number and a password for your server. This will allow other users to connect to your server and share files.\n- Click on the \"Start Server\" button to initiate your server.\n\n### 4. Connecting to Other Peers\n\n- To connect to other peers, you'll need their server information, including their host address, port number, and password.\n- Enter the host address, port number, and password of the peer you want to connect to in the provided fields.\n- Click on the \"Connect to Peer\" button to establish a connection with the peer.\n\n### 5. Sharing Your Files\n\n- ViralShare allows you to share files from a specific folder on your computer.\n- All files that need to be shared must be in the folder `share` on the same level as the application file, which will be automatically build when you start the server.\n- Click on the \"List Files\" button to view the files available for sharing from your designated share folder.\n\n### 6. Downloading Files from Peers\n\n- To download files shared by other connected peers, click on the \"List All Files\" button.\n- This will display a list of files shared by other peers connected to your server.\n- Enter the filename you want to download in the download box and hit the download button.\n- The downloaded file will be stored in the `download` folder on the same level as the application file, which will be automatically build when you start the server.\n\n## Additional Features\n\n- **Password Protection:** ViralShare ensures that only authorized users can access and use the application. The application cannot be modified or distributed without explicit permission from the owner.\n- **License:** Users are granted the right to use ViralShare for personal use only. Any modifications or distributions require prior approval from the owner.\n- **Contributors:** This application was developed by:\n  - [Biyawala Viral Deven](https://github.com/ViralBiyawala)\n  - [Shivam Sikotra](https://github.com/ShivamSikotra11)\n  - [Patel Shyam](https://github.com/shyam2024)\n\n## For contributions, please contact [Biyawala Viral Deven](https://github.com/ViralBiyawala).\n\nThat's it! You're now ready to use ViralShare to share and download files securely with other users on your network. If you encounter any issues or have feedback, feel free to reach out to the owner for support.\n"
+        },
+        {
+            "title": "University Enrollment Prediction",
+            "description": "Employing Scikit-learn's robust linear regression algorithm, I meticulously crafted a predictive model renowned for its accuracy in forecasting student enrollments. Impressively, the model achieved a strikingly low RMSE of 0.3, underscoring its exceptional precision. Through thorough analysis of extensive historical enrollment data, I demonstrated the practical application of advanced machine learning techniques in real-world scenarios.",
+            "live_link": "https://www.datacamp.com/datalab/w/8e67ad0d-b572-4c54-9a28-2819dd8e87fc",
+            "github_link": ""
+        },
+        {
+            "title": "Analysis of Android Apps",
+            "description": "In the project, I delved into sentiment analysis, meticulously examining around 10,000 apps sourced from the Google Play Store. Leveraging powerful tools like Plotly, Seaborn, and Pandas, I intricately decoded user reviews to unearth profound insights into their sentiments and preferences. This comprehensive analysis paved the way for informed decision-making and strategic planning in app development.",
+            "live_link": "",
+            "github_link": "https://github.com/ViralBiyawala/DS_ML_Projects/tree/main/The_Android_App_Market_on_Google_Play"
+        },
+        {
+            "title": "Portfolio",
+            "description": "My portfolio showcases a diverse range of projects, including AI chatbots, predictive models, and web applications, all meticulously crafted to demonstrate my technical prowess and creativity. By leveraging cutting-edge technologies and innovative approaches, I have developed a robust portfolio that reflects my passion for AI, machine learning, and software development.",
+            "live_link": "https://viralbiyawala.pythonanywhere.com/",
+            "github_link": "https://github.com/ViralBiyawala/Portfolio",
+            "stars": 3,
+            "language": "JavaScript",
+            "readme": "# Portfolio\nViral Biyawala Portfolio\n"
+        },
+        {
+            "title": "Data Science Projects",
+            "description": "My data science projects encompass a wide array of topics, including predictive modeling, data analysis, and machine learning applications. By leveraging Python, SQL, and advanced data science libraries, I have developed a diverse portfolio that showcases my expertise in data wrangling, visualization, and predictive analytics. These projects highlight my ability to derive actionable insights from complex datasets and deliver innovative solutions to real-world problems.",
+            "live_link": "",
+            "github_link": "https://github.com/ViralBiyawala/DS_ML_Projects",
+            "stars": 0,
+            "language": "Jupyter Notebook",
+            "readme": "# DS_ML_Projects\n> Projects for Learning for The Data Science , Data Analysis , Machine Learning\n# Data\n> All the Data files are uploaded in the datasets folder of Each Individual Project Folders\n## Data Source and Usage\n> The data used in this project was obtained from [Kaggle](https://www.kaggle.com/) under their terms and conditions. Please note the following regarding the data:\n> \n> - The dataset is subject to copyright and intellectual property laws.\n> - The data is intended for non-commercial and learning purposes only.\n> - Any usage beyond the permitted purposes may require explicit permission from the data provider.\n> - Attribution to the original data source is required. Please refer to the appropriate acknowledgments section for details.\n> \n> Please ensure that you review and comply with Kaggle's terms and conditions and any additional licensing or usage restrictions specified by the data provider.\n> \n> For more information about the dataset and how to access it, please refer to the [Kaggle Terms page](https://www.kaggle.com/terms).\n## License\n> This project is licensed under the [MIT License](LICENSE). Feel free to modify and adapt the code according to your needs."
+        }
+    ],
+    "certificates": [
+        {
+            "title": "Data Science Professional Certificate",
+            "institution": "DataCamp",
+            "duration": "July 2023 - July 2025",
+            "credential_id": "DS0022970321476",
+            "certificate_link": "https://www.datacamp.com/certificate/DS0022970321476"
+        },
+        {
+            "title": "Associate Data Analyst Certification",
+            "institution": "DataCamp",
+            "duration": "June 2024 - June 2026",
+            "credential_id": "DAA0014613937359",
+            "certificate_link": "https://www.datacamp.com/certificate/DAA0014613937359"
+        },
+        {
+            "title": "Introduction to Statistics for Data Science",
+            "institution": "Coursera - Stanford University",
+            "duration": "July 2023",
+            "credential_id": "YR3SX5W7HYDJ",
+            "certificate_link": "https://www.coursera.org/account/accomplishments/certificate/YR3SX5W7HYDJ"
+        },
+        {
+            "title": "SQL Associate Certification",
+            "institution": "DataCamp",
+            "duration": "July 2024 - July 2026",
+            "credential_id": "SQA0014151700900",
+            "certificate_link": "https://www.datacamp.com/certificate/SQA0014151700900"
+        },
+        {
+            "title": "Data Engineer Associate Certification",
+            "institution": "DataCamp",
+            "duration": "June 2023 - June 2025",
+            "credential_id": "DEA0017111704609",
+            "certificate_link": "https://www.datacamp.com/certificate/DEA0017111704609"
+        },
+        {
+            "title": "Introduction to Web Development",
+            "institution": "Coursera - University of California, Davis",
+            "duration": "April 2022",
+            "credential_id": "5DU9YH99ESNZ",
+            "certificate_link": "https://www.coursera.org/account/accomplishments/certificate/5DU9YH99ESNZ"
+        },
+        {
+            "title": "Introduction to the Internet of Things and Embedded Systems",
+            "institution": "Coursera - University of California, Irvine",
+            "duration": "March 2022",
+            "credential_id": "RXB2NMHEVCET",
+            "certificate_link": "https://www.coursera.org/account/accomplishments/certificate/RXB2NMHEVCET"
+        },
+        {
+            "title": "National Intellectual Property Awareness Mission",
+            "institution": "Government of India",
+            "duration": "September 2022",
+            "credential_id": "",
+            "certificate_link": "https://iprsearch.ipindia.gov.in/RQStatus/IPR_EVENT.aspx?FileName=QmF0Y2g0L01yLlZJUkFMMTI5MTY5MC5wZGY="
+        }
+    ],
+    "skills": {
+        "languages": [
+            "Python",
+            "SQL",
+            "C++",
+            "YAML",
+            "JavaScript"
+        ],
+        "technologies": [
+            "Microsoft Power BI",
+            "Google Cloud Platform",
+            "Tableau",
+            "Git",
+            "Django",
+            "Flask",
+            "PyTorch",
+            "PostgreSQL"
+        ],
+        "machine_learning": [
+            "Deep Learning",
+            "Computer Vision",
+            "Natural Language Processing (NLP)",
+            "MLOps",
+            "Statistics",
+            "Testing"
+        ],
+        "soft_skills": [
+            "Communication",
+            "Teamwork",
+            "Leadership",
+            "Research",
+            "Group Discussion",
+            "Problem-Solving",
+            "Time Management"
+        ]
+    },
+    "achievements": [
+        "Ranked 300th out of 975 participants in Kaggle BirdClef 2024, with a ROC value of 62.62%",
+        "Maintained 500+ daily problem streak on LeetCode and achieved a 3* rating on CodeChef with a max rating of 1622",
+        "Earned 350,000+ XP, completed 7projects, and finished 14tracks on DataCamp with top performance"
+    ]
+}
